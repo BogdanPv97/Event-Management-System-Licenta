@@ -1,0 +1,129 @@
+<article class="container display-2 text-primary" style="margin-top: 6rem">
+  <div>DASHBOARD</div>
+</article>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title color-danger">WARNING</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete this event?</p>
+  </div>
+  <div class="modal-footer d-flex justify-content-between">
+    <button class="btn btn-danger" (click)="deleteEvent()">YES</button>
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>
+
+<article class="mt-4">
+  <article>
+    <!--filters -->
+  </article>
+  <article class="container">
+    <mat-tab-group>
+      <mat-tab label="Events">
+        <table class="table table-striped table-hover table-responsive">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Event title</th>
+              <th>Category</th>
+              <th>Location</th>
+              <th>Image URL</th>
+              <th>Size Limit</th>
+              <th>Price</th>
+              <th>Age Restriction</th>
+              <th>Going</th>
+              <th>Interested</th>
+              <th>Date</th>
+              <th>Last Update</th>
+              <th>City</th>
+              <th>
+                <button
+                  class="btn btn-primary w-100"
+                  routerLink="/dashboard/createEvent"
+                  routerLinkActive="active-link"
+                >
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let event of allEvents">
+            <tr>
+              <td>{{ event.eventId }}</td>
+              <td>{{ event.name }}</td>
+              <td>{{ event.category }}</td>
+              <td>{{ event.location }}</td>
+              <td>{{ event.imageUrl }}</td>
+              <td>{{ event.sizeLimit }}</td>
+              <td>{{ event.price }}</td>
+              <td>{{ event.ageRestriction }}</td>
+              <td>{{ event.going }}</td>
+              <td>{{ event.interested }}</td>
+              <td>{{ event.startDate }}</td>
+              <td>{{ event.lastUpdate }}</td>
+              <td>{{ event.city }}</td>
+              <td>
+                <button class="btn btn-success btn-sm">Update</button>
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="openVerticallyCentered(content, event.eventId)"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-tab>
+      <mat-tab label="Users">
+        <table class="table table-striped table-hover table-responsive">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Role</th>
+              <th>Age</th>
+              <th>Newsletter</th>
+              <th>City</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let user of usersDetails">
+            <tr>
+              <td>{{ user.userId }}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.role }}</td>
+              <td>{{ user.age }}</td>
+              <td>{{ user.newsletter }}</td>
+              <td>{{ user.city }}</td>
+              <td>
+                <button class="btn btn-success btn-sm">Update</button>
+                <button class="btn btn-danger btn-sm">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-tab>
+    </mat-tab-group>
+  </article>
+</article>

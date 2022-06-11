@@ -1,0 +1,48 @@
+<article class="container" style="margin-top: 6rem">
+  <section class="inline-form">
+    <span class="text-muted">City: </span>
+    <select
+      [(ngModel)]="selectedCity"
+      type="dropdown"
+      class="form-control w-25 mx-3 mb-5 d-inline"
+      (change)="handleCityChange()"
+    >
+      <option *ngFor="let city of cities">
+        {{ city.name }}
+      </option>
+    </select>
+
+    <span class="text-muted">Category: </span>
+    <select
+      [(ngModel)]="selectedCategory"
+      type="dropdown"
+      class="form-control w-25 mx-3 mb-5 d-inline"
+      (change)="handleCategoryChange()"
+    >
+      <option *ngFor="let category of categories">
+        {{ category.categoryName }}
+      </option>
+    </select>
+  </section>
+  <section class="d-flex flex-wrap justify-content-around">
+    <section *ngFor="let tempEvent of events">
+      <article class="card col-md-3 mb-3" style="width: 20rem">
+        <img
+          class="card-img-top card-fluid"
+          style="width: 19.9rem"
+          src="https://source.unsplash.com/random/300x200"
+        />
+        <section class="card-body">
+          <h4 class="card-title">{{ tempEvent.name }}</h4>
+          <p class="card-text">{{ tempEvent.description }}</p>
+          <a
+            class="btn btn-success btn-block"
+            routerLink="/events/{{ tempEvent.eventId }}"
+            routerLinkActive="active-link"
+            >Read More</a
+          >
+        </section>
+      </article>
+    </section>
+  </section>
+</article>

@@ -1,0 +1,59 @@
+<article class="container border bg-light" style="padding-top: 6rem">
+  <section class="d-flex flex-column">
+    <section class="d-flex w-100" style="height: 300px">
+      <!--image and info + buttons -->
+      <img
+        class="img-fluid col-sm-3 border border-secondary"
+        style="width: 19rem"
+        src="https://source.unsplash.com/random/300x200"
+      />
+      <section
+        class="d-flex flex-column col-md-8 border border-secondary justify-content-between"
+      >
+        <div>
+          <h3 class="text-center my-3">{{ eventDetails.name }}</h3>
+          <p>{{ eventDetails.name }}</p>
+        </div>
+        <section class="d-flex justify-content-around">
+          <div>
+            <i class="fa-regular fa-compass m-2"></i>{{ eventDetails.location }}
+          </div>
+          <div>
+            <i class="fa-regular fa-calendar m-2"></i
+            >{{ eventDetails.startDate }}
+          </div>
+        </section>
+        <div class="text-center">
+          <i class="fa-regular fa-money-bill-1 m-2"></i>PRICE:
+          {{ eventDetails.price | currency: "RON" }}
+        </div>
+        <section class="d-flex justify-items-between">
+          <button class="btn btn-success btn-sm col-md-3 offset-md-1">
+            Going
+            <span class="badge badge-light mr-5">{{ eventDetails.going }}</span>
+          </button>
+          <button class="btn btn-success btn-sm col-md-3 offset-md-3">
+            Interested
+            <span class="badge badge-light ml-5">{{
+              eventDetails.interested
+            }}</span>
+          </button>
+        </section>
+        <button
+          class="btn btn-outline-success btn-lg w-100"
+          routerLink="/checkout/payment"
+          routerLinkActive="active-link"
+        >
+          Buy Ticket
+        </button>
+      </section>
+    </section>
+
+    <section class="pt-5 bg-light">
+      <!--description -->
+      <p>
+        {{ eventDetails.description }}
+      </p>
+    </section>
+  </section>
+</article>

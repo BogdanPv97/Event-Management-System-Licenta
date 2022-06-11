@@ -1,0 +1,21 @@
+<article class="container pt-5">
+  <article class="d-flex flex-wrap justify-content-around">
+    <section *ngFor="let category of categories">
+      <a
+        routerLink="/events/categories/{{ category.eventCategoryId }}"
+        routerLinkActive="active-link"
+        class="text-decoration-none text-dark overlay"
+      >
+        <article
+          class="card m-5 text-center bg-success align-items-center col-md"
+          style="width: 15rem; height: 5rem"
+        >
+          <h3 class="card-title align-items-center">
+            {{ category.categoryName }}
+            <span class="badge badge-primary mt-4">30</span>
+          </h3>
+        </article>
+      </a>
+    </section>
+  </article>
+</article>

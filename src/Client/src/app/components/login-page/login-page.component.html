@@ -1,0 +1,47 @@
+<article class="container" style="padding-top: 10rem">
+  <article class="row w-100">
+    <section class="col-md-12 col-md-offset-4 column">
+      <form
+        [formGroup]="loginFormGroup"
+        (ngSubmit)="handleLogin()"
+        class="form d-flex flex-column align-items-center"
+      >
+        <section class="col form-group">
+          <div class="text-center h2 mb-5">Login</div>
+          <div formGroupName="credentials" class="form-area bg-light">
+            <div class="row">
+              <input
+                formControlName="username"
+                type="text"
+                class="form-control"
+                placeholder="username"
+              />
+            </div>
+
+            <div class="row mt-1">
+              <input
+                formControlName="password"
+                type="password"
+                class="form-control"
+                placeholder="password"
+              />
+            </div>
+          </div>
+
+          <button class="btn btn-primary mt-4 w-100" (click)="handleLogin()">
+            SIGN IN
+          </button>
+        </section>
+      </form>
+      <div class="text-center">
+        <button
+          class="btn btn-sm btn-outline-secondary mt-3 text-center"
+          routerLink="/user/register"
+          routerLinkActive="active-link"
+        >
+          Create a new account
+        </button>
+      </div>
+    </section>
+  </article>
+</article>
