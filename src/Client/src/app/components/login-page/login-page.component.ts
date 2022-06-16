@@ -42,9 +42,9 @@ export class LoginPageComponent implements OnInit {
 
   userLogin(credentials: UserCredentials) {
     this.authenticationService.loginUser(credentials).subscribe(
-      (response) => {
+      (response: HttpResponse<any>) => {
         console.log('sunt in login function');
-        console.log(response);
+        console.log('response ' + response);
         const token = response.headers.get('Authorization');
         this.authenticationService.saveToken(token);
         //this.authenticationService.addUserToLocalCache(response.body);

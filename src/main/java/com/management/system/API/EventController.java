@@ -53,7 +53,7 @@ public class EventController {
     @GetMapping(path="/eventDetails/{eventId}")
     public ResponseEntity<EventDetailsDTO> getEventDetailsById(@PathVariable("eventId") long eventId){
         try{
-            return new ResponseEntity<>(eventService.getEventDetailsById(eventId), HttpStatus.FOUND);
+            return new ResponseEntity<>(eventService.getEventDetailsById(eventId), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,7 +83,7 @@ public class EventController {
     @GetMapping("/city/{cityId}")
     public ResponseEntity<List<Event>> getAllEventsFromCity(@PathVariable("cityId") long cityId){
         try{
-            return new ResponseEntity<>(eventService.getAllEventsFromCity(cityId), HttpStatus.FOUND);
+            return new ResponseEntity<>(eventService.getAllEventsFromCity(cityId), HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -120,7 +120,7 @@ public class EventController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Event> updateEvent(@RequestBody @Valid EventDTO event){
         try{
-            return new ResponseEntity<>(eventService.saveEvent(event), HttpStatus.CREATED);
+            return new ResponseEntity<>(eventService.saveEvent(event), HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -154,7 +154,7 @@ public class EventController {
         }
 
         if(event != null) {
-            return new ResponseEntity<Event>(event,HttpStatus.ACCEPTED);
+            return new ResponseEntity<Event>(event,HttpStatus.OK);
         }
 
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

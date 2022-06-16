@@ -2,7 +2,7 @@
   <h3>Your Tickets</h3>
   <ul class="d-flex flex-column">
     <article *ngFor="let ticket of tickets">
-      <article class="border">
+      <article class="border mt-3">
         <li class="d-flex justify-items-center align-items-center flex-wrap">
           <img
             class="img-fluid pt-3"
@@ -10,35 +10,19 @@
             style="width: 17rem"
           />
           <section class="mx-4">
-            <h3>Event title</h3>
-            <div class="mt-2">Date:</div>
-            <div class="mt-2">price:</div>
+            <h3>{{ ticket.eventName }}</h3>
+            <div class="mt-2">Date: {{ ticket.eventStartDate }}</div>
+            <div class="mt-2">price: {{ ticket.price | currency: "RON" }}</div>
 
-            <button class="btn btn-success mt-4 w-100">Go To Event</button>
+            <button
+              class="btn btn-success mt-4 w-100"
+              (click)="goToEvent(ticket.eventId)"
+            >
+              Go To Event
+            </button>
           </section>
         </li>
       </article>
     </article>
   </ul>
 </article>
-
-<!-- <article class="container mt-5 bg-light">
-  <article class="d-flex flex-column">
-    <ul>
-      <li class="d-flex justify-items-center align-items-center flex-wrap">
-        <img
-          class="img-fluid pt-3"
-          src="https://source.unsplash.com/random/300x200"
-          style="width: 17rem"
-        />
-        <section class="mx-4">
-          <h3>Event title</h3>
-          <div class="mt-2">Date:</div>
-          <div class="mt-2">price:</div>
-
-          <button class="btn btn-success mt-4 w-100">Go To Event</button>
-        </section>
-      </li>
-    </ul>
-  </article>
-</article> -->

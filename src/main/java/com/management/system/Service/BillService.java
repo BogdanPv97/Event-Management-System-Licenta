@@ -19,6 +19,9 @@ public class BillService{
     @Autowired
     private UserService userService;
 
+    public Bill saveBill(Bill bill){
+        return billRepository.save(bill);
+    }
 
     public List<Bill> getAllBills() {
         return billRepository.findAll();

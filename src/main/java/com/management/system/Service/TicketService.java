@@ -68,6 +68,9 @@ public class TicketService{
           dto.setBillId(ticket.getBill().getBillId());
           dto.setUserId(ticket.getUser().getUserId());
           dto.setEventId(ticket.getEvent().getEventId());
+          dto.setEventName(ticket.getEvent().getName());
+          dto.setEventStartDate(ticket.getEvent().getStartDate());
+          dto.setPrice(ticket.getEvent().getPrice());
           ticketsDTO.add(dto);
       }
 

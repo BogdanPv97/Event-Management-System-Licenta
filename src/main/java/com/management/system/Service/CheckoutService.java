@@ -1,6 +1,8 @@
 package com.management.system.Service;
 
+import com.management.system.Entity.Bill;
 import com.management.system.Entity.DTO.PaymentInfoDTO;
+import com.management.system.Entity.Ticket;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +24,13 @@ public class CheckoutService {
 
     @Autowired
     private BillService billService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private EventService eventService;
+
 
     public CheckoutService(@Value("${stripe.key.secret}") String secretKey) {
         //initialize Stripe API wih secret key
@@ -39,5 +49,25 @@ public class CheckoutService {
         params.put("payment_method_types", paymentMethodTypes);
 
         return PaymentIntent.create(params);
+    }
+
+    public Bill placeOrder(long eventId, long userId){
+        Bill bill = new Bill();
+        bill.setUser(userService.getUserById(userId));
+        bill.setAmount(1000);
+        bill.setIssuedDate( LocalDate.now());
+        bill.setPaid(true);
+        bill.setDescription("Ticket for event " + eventService.getEventById(eventId).getName());
+        billService.saveBill(bill);
+
+        Ticket ticket = new Ticket();
+        ticket.setBill(bill);
+        ticket.setEvent(eventService.getEventById(eventId));
+        ticket.setUser(userService.getUserById(userId));
+
+        ticketService.saveTicket(ticket);
+
+        return bill;
+
     }
 }

@@ -138,4 +138,13 @@ export class ApiUrl {
   saveCity() {
     return settings.baseURL + 'city/saveCity';
   }
+
+  //Payment intent
+  createPaymentIntent() {
+    return settings.baseURL + `/checkout/payment-intent`;
+  }
+
+  placeOrder(eventId: number, userId: number){
+    return settings.baseURL + `/checkout/placeOrder/${eventId}/${userId}`;
+  }
 }

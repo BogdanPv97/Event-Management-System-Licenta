@@ -1,5 +1,6 @@
 package com.management.system.API;
 
+import com.management.system.Entity.Bill;
 import com.management.system.Entity.DTO.PaymentInfoDTO;
 import com.management.system.Entity.DTO.PaymentStatusDTO;
 import com.management.system.Service.BillService;
@@ -37,6 +38,17 @@ public class CheckoutController {
             billService.validatePayment(paymentStatusDTO);
             return new ResponseEntity<>(true, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/placeOrder/{eventId}/{userId}")
+    public ResponseEntity<Bill> placeOrder(@PathVariable("eventId") long eventId, @PathVariable("userId") long userId){
+        try{
+            return new ResponseEntity<>(checkoutService.placeOrder(eventId, userId), HttpStatus.OK);
+        } catch (Exception e){
             e.printStackTrace();
         }
 

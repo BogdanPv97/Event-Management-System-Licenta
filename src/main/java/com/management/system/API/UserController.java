@@ -36,10 +36,10 @@ public class UserController {
     private EventService eventService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+
     public ResponseEntity<List<User>> getUsers(){
         try{
-            return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.FOUND);
+            return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/userDetails")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+
     public ResponseEntity<List<UserDetailsDTO>> getBulkUserDetails(){
         try{
             return new ResponseEntity<>(userService.getBulkUserDetails(), HttpStatus.OK);
@@ -60,10 +60,10 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+
     public ResponseEntity<User> getUserById(@PathVariable("userId") long id){
         try{
-            return new ResponseEntity<User>(userService.getUserById(id), HttpStatus.FOUND);
+            return new ResponseEntity<User>(userService.getUserById(id), HttpStatus.OK);
         } catch (EmptyResultDataAccessException e){
             e.printStackTrace();
         }
@@ -72,14 +72,14 @@ public class UserController {
     }
 
     @GetMapping("/getByUsername/{username}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+
     public ResponseEntity<User> getUserByUsername(@PathVariable(value = "username") String username){
         try{
             User user= userService.getUserByUsername(username);
 //            if(user.size() > 0) {
 //                return new ResponseEntity<User>(user.get(0), HttpStatus.OK);
 //            }
-            return new ResponseEntity<>(user,HttpStatus.FOUND);
+            return new ResponseEntity<>(user,HttpStatus.OK);
         }catch(UsernameNotFoundException e){
             e.printStackTrace();
         }
@@ -88,7 +88,7 @@ public class UserController {
     }
 
     @GetMapping("/getGoingEvents/{user_id}")
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+
     public ResponseEntity<List<Event>> getGoingEventsForUserId(@PathVariable(value = "user_id") long userId){
         try{
             return new ResponseEntity<>(eventService.getGoingEventsForUserId(userId), HttpStatus.OK);
@@ -100,7 +100,7 @@ public class UserController {
     }
 
     @GetMapping("/getInterestedEvents/{user_id}")
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+
     public ResponseEntity<List<Event>> getInterestedEventsForUserId(@PathVariable(value = "user_id") long userId){
         try{
             return new ResponseEntity<>(eventService.getInterestedEventsForUserId(userId), HttpStatus.OK);
@@ -112,7 +112,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/appendEventToUser", consumes = "application/json")
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+
     public ResponseEntity<String> appendEventToUserList(@RequestBody EventUserMappingDTO eventUserMappingDTO){
         try {
             userService.appendEventToUserList(eventUserMappingDTO);
@@ -126,7 +126,6 @@ public class UserController {
 
     @PostMapping(path = "/registerUser",consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user){
         System.out.println("From controller" + user);
         try{
@@ -140,10 +139,10 @@ public class UserController {
 
     @PutMapping(path = "/updateUser/{userId}", consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+
     public ResponseEntity<User> updateUser(@RequestBody User user){
         try{
-            return new ResponseEntity<User>(userService.persistUser(user), HttpStatus.CREATED);
+            return new ResponseEntity<User>(userService.persistUser(user), HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -153,7 +152,7 @@ public class UserController {
 
     @PatchMapping(path = "/partialUpdate/{userId}", consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+
     public ResponseEntity<User> partialUpdate(@PathVariable("userId") long id, @RequestBody @Valid UserDTO patchEmployee){
         User user = null;
         try {
@@ -182,7 +181,7 @@ public class UserController {
         }
 
         try {
-            return new ResponseEntity<>(userService.persistUser(user), HttpStatus.CREATED);
+            return new ResponseEntity<>(userService.persistUser(user), HttpStatus.OK);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -191,7 +190,7 @@ public class UserController {
     }
 
     @DeleteMapping("deleteUser/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+
     public ResponseEntity<User> deleteUser(@PathVariable("id") Long id){
         try {
             userService.deleteById(id);

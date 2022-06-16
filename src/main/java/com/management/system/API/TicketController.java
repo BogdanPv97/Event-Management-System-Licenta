@@ -22,10 +22,10 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping("/{userId}")
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+
     public ResponseEntity<List<TicketDTO>> getTicketsFromUser(@PathVariable("userId") long userId){
         try{
-            return new ResponseEntity<>(ticketService.getAllTicketsForUser(userId), HttpStatus.FOUND);
+            return new ResponseEntity<>(ticketService.getAllTicketsForUser(userId), HttpStatus.OK);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -34,10 +34,10 @@ public class TicketController {
     }
 
     @GetMapping("/{userId}/{ticketId}")
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+
     public ResponseEntity<Ticket> getTicketForUserById(@PathVariable("userId") long userId, @PathVariable("ticketId") long ticketId){
         try{
-            return new ResponseEntity<>(ticketService.getTicketForUserById(userId, ticketId), HttpStatus.FOUND);
+            return new ResponseEntity<>(ticketService.getTicketForUserById(userId, ticketId), HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -46,7 +46,7 @@ public class TicketController {
     }
 
     @GetMapping("/eventTickets/{event_id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+
     public ResponseEntity<Integer> getNoOfTicketsForEvent(@PathVariable("event_id") long eventId){
         try{
             return new ResponseEntity<>(ticketService.getNoOfTicketsForEvent(eventId), HttpStatus.OK);
@@ -59,7 +59,7 @@ public class TicketController {
 
     @PostMapping(path = "/saveTicket",consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+
     public void saveTicket(@RequestBody @Valid Ticket ticket){
         try {
             ticketService.saveTicket(ticket);

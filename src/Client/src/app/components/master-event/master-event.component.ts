@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventCategory } from 'src/app/common/event-category';
 import { EventDetails } from 'src/app/common/event-details';
 import { EventService } from 'src/app/service/event.service';
@@ -35,11 +35,16 @@ export class MasterEventComponent implements OnInit {
 
   populateEventData() {
     const eventId: number = +this.route.snapshot.paramMap.get('eventId');
+    console.log(eventId);
 
     this.eventService.getEventDetailsById(eventId).subscribe((result) => {
       this.eventDetails = result;
-      console.log(this.eventDetails);
+      console.log(result);
     });
     console.log(this.eventDetails);
+  }
+
+  setAmount() {
+    this.eventService.setTicketEvent(this.eventDetails);
   }
 }

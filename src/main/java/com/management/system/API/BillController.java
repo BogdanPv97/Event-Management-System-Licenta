@@ -21,7 +21,7 @@ public class BillController {
     @GetMapping("/{userId}")
     public ResponseEntity<List<Bill>> getBillsForUser(@PathVariable("userId") long userId){
          try{
-             return new ResponseEntity<>(billService.getAllBillsForUser(userId), HttpStatus.FOUND);
+             return new ResponseEntity<>(billService.getAllBillsForUser(userId), HttpStatus.OK);
          } catch (Exception e) {
              e.printStackTrace();
          }
@@ -32,7 +32,7 @@ public class BillController {
     @GetMapping("/{userId}/{billId}")
     public ResponseEntity<Bill> getBillForUserById(@PathVariable("userId") long userId, @PathVariable("billId") long billId){
         try{
-            return new ResponseEntity<>(billService.getBillForUserById(userId, billId), HttpStatus.FOUND);
+            return new ResponseEntity<>(billService.getBillForUserById(userId, billId), HttpStatus.OK);
         } catch (Exception e){
             e.printStackTrace();
         }

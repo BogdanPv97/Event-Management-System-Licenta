@@ -15,6 +15,8 @@ export class EventService {
   private apiKey = new ApiUrl();
   private response: string;
 
+  private ticketToBeBought: EventDetails;
+
   constructor(private http: HttpClient) {}
 
   getEventCategories(): Observable<EventCategory[]> {
@@ -67,5 +69,13 @@ export class EventService {
 
   addEvent(event: EventSaveDTO): Observable<EventSaveDTO> {
     return this.http.post<EventSaveDTO>(this.apiKey.saveEvent(), event);
+  }
+
+  setTicketEvent(event: EventDetails){
+    this.ticketToBeBought = event;
+  }
+
+  getEventForTicket(){
+    return this.ticketToBeBought;
   }
 }

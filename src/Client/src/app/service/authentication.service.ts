@@ -21,8 +21,9 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  loginUser(credentials: UserCredentials): Observable<any> {
-    return this.http.post<UserCredentials>(
+  loginUser(credentials: UserCredentials): Observable<HttpResponse<Object>> {
+    console.log(credentials);
+    return this.http.post<HttpResponse<Object>>(
       'http://localhost:9191/login',
       credentials
     );
@@ -30,7 +31,7 @@ export class AuthenticationService {
 
   loadToken(): void {
     //
-    this.token = localStorage.getItem('jwtToken');
+    this.token = window.localStorage.getItem('jwtToken');
   }
 
   saveToken(token: string) {
