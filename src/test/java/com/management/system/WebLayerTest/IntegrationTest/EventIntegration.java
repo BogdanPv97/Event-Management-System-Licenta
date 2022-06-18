@@ -47,7 +47,10 @@ public class EventIntegration {
 
     @Test
     public void getAllEvents() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:9191/events").accept(MediaType.APPLICATION_JSON)).andDo(print()).andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:9191/events").
+                accept(MediaType.APPLICATION_JSON)).
+                andDo(print()).
+                andExpect(status().isOk());
     }
 
     @Test

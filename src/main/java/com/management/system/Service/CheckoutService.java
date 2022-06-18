@@ -54,7 +54,7 @@ public class CheckoutService {
     public Bill placeOrder(long eventId, long userId){
         Bill bill = new Bill();
         bill.setUser(userService.getUserById(userId));
-        bill.setAmount(1000);
+        bill.setAmount(eventService.getEventById(eventId).getPrice());
         bill.setIssuedDate( LocalDate.now());
         bill.setPaid(true);
         bill.setDescription("Ticket for event " + eventService.getEventById(eventId).getName());

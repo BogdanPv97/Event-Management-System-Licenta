@@ -1,6 +1,7 @@
 package com.management.system.Service;
 
 import com.management.system.DAO.UserRepository;
+import com.management.system.Entity.DTO.Credentials;
 import com.management.system.Entity.DTO.EventUserMappingDTO;
 import com.management.system.Entity.DTO.UserDTO;
 import com.management.system.Entity.DTO.UserDetailsDTO;
@@ -112,6 +113,15 @@ public class UserService{
 
     public List<String> getAllEmailsFromSubscription(){
         return userRepository.getAllEmailsFromSubscription();
+    }
+
+    public UserDetailsDTO getLoggedUser(String username){
+        User user = getUserByUsername(username);
+        UserDetailsDTO userDetailsDTO = dtoConverter.convertUserToUserDetailsDTO(user);
+        userDetailsDTO.setCity(cityService.getCityNameById(user.getCity().getCityId()));
+
+        return userDetailsDTO;
+
     }
 }
 

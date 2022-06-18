@@ -1,7 +1,9 @@
 package com.management.system.Service;
 
 import com.management.system.Entity.Bill;
+import com.management.system.Entity.DTO.EventDTO;
 import com.management.system.Entity.Event;
+import com.management.system.Utility.DTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,6 +20,9 @@ public class EmailService{
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DTOConverter dtoConverter;
 
     private final String newEventEmailSubject = "New Event In Town";
     private final String invoiceEmailSubject = "Invoice";
@@ -50,7 +55,8 @@ public class EmailService{
 
 
 
-    public void sendNewsletterEmail(Event event){
+    public void sendNewsletterEmail(EventDTO eventDTO){
+        Event event = dtoConverter.eventDtoToEntityConverter(eventDTO);
        String emailBody =  prepareNewsletterEmail(event);
 
        sendEmail(userService.getAllEmailsFromSubscription(), newEventEmailSubject, emailBody);

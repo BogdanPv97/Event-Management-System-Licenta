@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Ticket, TicketInfo } from 'src/app/common/ticket';
+import { UserDetails } from 'src/app/common/user-details';
+import { AuthenticationService } from 'src/app/service/authentication.service';
+import { SharedService } from 'src/app/service/shared.service';
 import { TicketService } from 'src/app/service/ticket.service';
 
 @Component({
@@ -10,21 +14,37 @@ import { TicketService } from 'src/app/service/ticket.service';
 })
 export class ListTicketsComponent implements OnInit {
   tickets: TicketInfo[];
+  loggedUser: UserDetails;
 
-  constructor(private ticketService: TicketService, private route: Router) {}
+  constructor(
+    private ticketService: TicketService,
+    private route: Router,
+    private cookie: CookieService,
+    private auth: AuthenticationService,
+    private shared: SharedService
+  ) {}
 
   ngOnInit(): void {
-    this.getAllTicketsForUser();
+    this.populateUser();
+    setTimeout(() => this.getAllTicketsForUser(), 800);
+  }
+
+  populateUser() {
+    this.auth
+      .getLoggedInUser(this.cookie.get('username'))
+      .subscribe((result) => {
+        this.loggedUser = result;
+      });
   }
 
   getAllTicketsForUser() {
-    const userId: number = +39;
+    this.ticketService
+      .getAllTicketsForUser(this.shared.loggedUser.userId)
+      .subscribe((result) => {
+        this.tickets = result;
 
-    this.ticketService.getAllTicketsForUser(userId).subscribe((result) => {
-      this.tickets = result;
-
-      console.log(result);
-    });
+        console.log(result);
+      });
   }
 
   goToEvent(eventId: number) {

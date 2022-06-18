@@ -69,6 +69,10 @@ export class ApiUrl {
     return settings.baseURL + `/login`;
   }
 
+  getLoggedUser(username: string) {
+    return settings.baseURL + `/auth/loggedUser/${username}`;
+  }
+
   getAllUsers() {
     return settings.baseURL + `/users`;
   }
@@ -144,7 +148,7 @@ export class ApiUrl {
     return settings.baseURL + `/checkout/payment-intent`;
   }
 
-  placeOrder(eventId: number, userId: number){
+  placeOrder(eventId: number, userId: number) {
     return settings.baseURL + `/checkout/placeOrder/${eventId}/${userId}`;
   }
 }

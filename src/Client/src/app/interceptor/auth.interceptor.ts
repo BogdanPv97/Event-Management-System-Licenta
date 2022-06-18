@@ -18,7 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
     handler: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (request.url.includes(`${settings.baseURL}/login`)) {
-      console.log('cdececdas');
       return handler.handle(request);
     }
     if (request.url.includes(`${settings.baseURL}/users/registerUser`)) {

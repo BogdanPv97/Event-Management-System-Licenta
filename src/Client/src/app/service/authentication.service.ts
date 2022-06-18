@@ -6,10 +6,12 @@ import {
 } from '@angular/common/http';
 import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, tap } from 'rxjs';
 import { ApiUrl } from '../common/api-url';
 import { User } from '../common/user';
 import { UserCredentials } from '../common/user-credentials';
+import { UserDetails } from '../common/user-details';
 
 @Injectable({
   providedIn: 'root',
@@ -17,16 +19,27 @@ import { UserCredentials } from '../common/user-credentials';
 export class AuthenticationService {
   private apiKey = new ApiUrl();
 
+  loggedUser: UserDetails;
+
   private token: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cookie: CookieService) {}
 
   loginUser(credentials: UserCredentials): Observable<HttpResponse<Object>> {
     console.log(credentials);
     return this.http.post<HttpResponse<Object>>(
       'http://localhost:9191/login',
-      credentials
+      credentials,
+      { observe: 'response' }
     );
+  }
+
+  getUsernameFromCookie() {
+    return this.cookie.get('username');
+  }
+
+  getLoggedInUser(username: string): Observable<UserDetails> {
+    return this.http.get<UserDetails>(this.apiKey.getLoggedUser(username));
   }
 
   loadToken(): void {
