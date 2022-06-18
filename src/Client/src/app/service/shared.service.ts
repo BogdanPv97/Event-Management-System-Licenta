@@ -16,7 +16,14 @@ export class SharedService {
   ) {
     auth.getLoggedInUser(cookie.get('username')).subscribe((result) => {
       this.loggedUser = result;
-      this.isLoggedIn = true;
     });
+  }
+
+  getLoggedUser() {
+    return this.isLoggedIn;
+  }
+
+  setLoggeduser(state: boolean) {
+    this.isLoggedIn = state;
   }
 }

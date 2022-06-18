@@ -8,6 +8,7 @@ import { User } from 'src/app/common/user';
 import { UserCredentials } from 'src/app/common/user-credentials';
 import { UserDetails } from 'src/app/common/user-details';
 import { AuthenticationService } from 'src/app/service/authentication.service';
+import { SharedService } from 'src/app/service/shared.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginPageComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private route: Router,
     private cookieService: CookieService,
-    private userService: UserService
+    private userService: UserService,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class LoginPageComponent implements OnInit {
       .subscribe((response: HttpResponse<any>) => {
         const token = response.headers.get('Authorization');
         this.authenticationService.saveToken(token);
+        this.sharedService.setLoggeduser(true);
         this.route.navigateByUrl('');
       });
   }

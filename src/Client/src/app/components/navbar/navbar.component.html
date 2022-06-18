@@ -1,4 +1,4 @@
-<!-- <nav class="navbar navbar-expand-sm navbar-light bg-light mb-5 fixed-top">
+<nav class="navbar navbar-expand-sm navbar-light bg-light mb-5 fixed-top">
   <div class="container">
     <a class="navbar-brand" href="#">LOGO</a>
     <button
@@ -38,12 +38,14 @@
           >
         </li>
         <li class="navbar-item">
-          <a
-            class="nav-link"
-            routerLink="user/login"
-            routerLinkActive="active-link"
-            >Login</a
-          >
+          <div *ngIf="!loggedUser">
+            <a
+              class="nav-link"
+              routerLink="user/login"
+              routerLinkActive="active-link"
+              >Login</a
+            >
+          </div>
         </li>
         <li class="nav-item dropdown">
           <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"
@@ -69,7 +71,7 @@
               class="dropdown-item"
               >Dashboard</a
             >
-            <div *ngIf="!loggedUser">
+            <div *ngIf="loggedUser">
               <div class="dropdown-divider"></div>
               <a routerLink="/logout" class="dropdown-item text-danger"
                 >Log out</a
@@ -80,67 +82,4 @@
       </ul>
     </div>
   </div>
-</nav> -->
-
-<app-navbar></app-navbar>
-
-<hr />
-
-<main>
-  <router-outlet></router-outlet>
-</main>
-
-<footer style="margin-top: 350px">
-  <hr class="my-5" />
-  <section class="text-center mb-5">
-    <a href="#" class="btn btn-outline-secondary btn-sm text-center"
-      >back to top</a
-    >
-  </section>
-  <article class="d-flex justify-content-around">
-    <article class="d-flex flex-column">
-      <h5>CONTACT</h5>
-
-      <ul class="list-unstyled">
-        <li>Street: Strada</li>
-        <li>City: Timisoara</li>
-        <li>Region: Timis</li>
-        <li>Zip Code: 123456</li>
-        <li>Phone Number: 0726 475 822</li>
-        <li>Mobile Number: 0746 857 827</li>
-      </ul>
-    </article>
-
-    <article class="d-flex flex-column">
-      <h5>Follow us</h5>
-      <ul class="list-unstyled">
-        <li>
-          <a href="#"
-            ><i class="fa-brands fa-facebook fa-lg mb-4"
-              ><span class="mx-3">Facebook</span></i
-            ></a
-          >
-        </li>
-        <li>
-          <a href="#"
-            ><i class="fa-brands fa-instagram fa-lg mb-4"
-              ><span class="mx-3">Instagram</span></i
-            ></a
-          >
-        </li>
-        <li>
-          <a href="#"
-            ><i class="fa-brands fa-twitter fa-lg"
-              ><span class="mx-3">Twitter</span></i
-            ></a
-          >
-        </li>
-      </ul>
-    </article>
-  </article>
-
-  <article class="text-center mt-3">
-    <h5>EVENTZZ</h5>
-    <p>&copy; 2022 EVENTZZ. Built using Spring boot and Angular</p>
-  </article>
-</footer>
+</nav>

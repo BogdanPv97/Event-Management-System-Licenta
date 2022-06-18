@@ -25,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { CheckoutPaymentComponent } from './components/checkout-payment/checkout-payment.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { NavbarComponent } from './components/navbar/navbar.component';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
@@ -63,6 +64,7 @@ const routes: Routes = [
     CreateEventComponent,
     RegisterPageComponent,
     CheckoutPaymentComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
